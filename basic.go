@@ -2,6 +2,16 @@ package main
 
 import "fmt"
 
+var(
+	aa = 1
+	bb = "test"
+	cc = false
+)
+
+func variablePackage(){
+	fmt.Println(aa,bb,cc)
+}
+
 func variableInitAuto(){
 	var a int
 	var s string
@@ -26,6 +36,7 @@ func variableTypeShort(){
 
 func main() {
 	fmt.Println("Hello,Wolrd!")
+	variablePackage()
 	variableInitAuto()
 	variableInitMan()
 	variableTypeDeduction()
