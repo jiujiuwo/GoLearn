@@ -5,14 +5,14 @@ import (
 	"io/ioutil"
 )
 
-const filename = "abc.txt"
+const Filename = "abc.txt"
 
 /*
 	基础if语句
  */
 func testIf1(){
 	fmt.Println("基础if语句测试")
-	contents, err := ioutil.ReadFile(filename)
+	contents, err := ioutil.ReadFile(Filename)
 	if err != nil{
 		fmt.Println(err)
 	}else{
@@ -25,7 +25,7 @@ func testIf1(){
  */
 func testIf2(){
 	fmt.Println("带赋值的if语句测试")
-	if contents,err := ioutil.ReadFile(filename); err ==nil{
+	if contents,err := ioutil.ReadFile(Filename); err ==nil{
 		fmt.Printf("%s\n",contents)
 	}else {
 		fmt.Println(err)
@@ -72,7 +72,6 @@ func testIf2(){
 	 	result = a /b
 	 default:
 		 panic("unsupport operator: "+op)
-
 	 }
 
  	return result
