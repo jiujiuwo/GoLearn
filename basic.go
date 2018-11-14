@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+	"math/cmplx"
+)
 
 // 变量统一简化定义
 var(
@@ -50,6 +54,78 @@ func variableTypeShort(){
 	fmt.Println(a,b,s)
 }
 
+
+/*
+	测试Go语言内建 复数类型
+	以及复数库cmplx的使用
+ */
+
+ func variableComplex(){
+ 	fmt.Println("复数类型测试")
+ 	c := 3+4i
+ 	fmt.Println(c)
+ 	fmt.Println(cmplx.Abs(c))
+ 	fmt.Println( cmplx.Pow(math.E,1i*math.Pi) + 1)
+ 	fmt.Println(cmplx.Exp(1i*math.Pi)+1)
+ }
+
+ /*
+ 	强制类型转换演示
+  */
+
+func triangle(){
+	fmt.Println("强制类型转换测试")
+	var a,b int = 3,4
+	var c int
+	c = int(math.Sqrt(float64(a*a+b*b)))
+	fmt.Println(c)
+}
+
+func consts(){
+	fmt.Println("常量测试")
+	//普通值的枚举类型
+	const filename = "abc.txt"
+	const a,b = 3,4
+	var c int
+	c = int(math.Sqrt(a*a+b*b))
+	fmt.Println(filename,c)
+}
+/*
+	枚举类型（常量）
+ */
+func enums(){
+	fmt.Println("枚举测试")
+	//普通枚举类型
+	const(
+		cpp = 0
+		java = 1
+		python = 2
+	)
+	fmt.Println(cpp,java,python)
+
+	//自增值枚举类型
+	const(
+		spring = iota
+		summer
+		fall
+		winter
+	)
+
+	fmt.Println(spring,summer,fall,winter)
+
+	const(
+		b = 1 << (10*iota)
+		kb
+		mb
+		gb
+		tb
+		pb
+	)
+
+	fmt.Println(b,kb,mb,gb,tb,pb)
+
+}
+
 func main() {
 	fmt.Println("Hello,Wolrd!")
 	variablePackage()
@@ -57,4 +133,8 @@ func main() {
 	variableInitMan()
 	variableTypeDeduction()
 	variableTypeShort()
+	variableComplex()
+	triangle()
+	consts()
+	enums()
 }
