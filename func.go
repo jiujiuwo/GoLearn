@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"reflect"
+	"runtime"
 )
 
 func testFunc(a,b int,op string) int{
@@ -15,7 +17,7 @@ func testFunc(a,b int,op string) int{
 	case "*":
 		return a * b
 	case "/":
-		//return a / b
+		return a / b
 	default:
 		panic("unsupported operation: "+op)
 	}
@@ -51,22 +53,43 @@ func funcTestDiv(a,b int)(int, int ){
 
 /*
 	多返回值及名字
-
 */
 func funcTestDivName(a,b int)(c,d int){
 	return a/b,a%b
  }
 
 /*
-	函数式编程
+	函数式编程，函数作为形参（复合函数）
  */
 
  func apply(op func(int,int) int, a,b int) int{
- 	reflect.ValueOf(op).Pointer()
- 	fmt.Printf("Calling function %s witg args (%d,%d)")
+
+ 	p := reflect.ValueOf(op).Pointer()
+ 	opName := runtime.FuncForPC(p).Name()
+
+ 	fmt.Printf("Calling function %s with args (%d,%d)\n",opName,a,b)
  	return op(a,b)
  }
 
+ func myPow(a,b int) int {
+	 return int(math.Pow(float64(a),float64(b)))
+ }
+
+ /*
+ 	可变参数列表
+  */
+func mySum(numbers ...int) int{
+	s := 0
+	//range 的用法
+	for i := range numbers{
+		s += numbers[i]
+	}
+	return s
+}
+
+func swap(a,b int) {
+	a,b = b,a
+}
 func main() {
 	fmt.Println(testFunc(1,2,"+"))
 	fmt.Println(funcTestDiv(5,7))
@@ -80,4 +103,13 @@ func main() {
 	}else {
 		fmt.Println(result)
 	}
+
+	//反射和函数作为参数
+	fmt.Println(apply(myPow,3,4))
+
+	fmt.Println(apply(func(a,b int) int{
+		return int(math.Pow(float64(a),float64(b)))
+	},3,4))
+
+	fmt.Println(mySum(1,3,5,7,9,11))
 }
