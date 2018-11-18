@@ -6,9 +6,6 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 
 	index := (len(nums1)+len(nums2)) / 2
 	//fmt.Println(index)
-
-	var median float64 = 0
-
 	newArray := make([]int,index+1)
 
 	m,n := 0,0
@@ -38,11 +35,11 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	//fmt.Println(newArray)
 
 	if (len(nums2) + len(nums1)) % 2 == 0{
-		median =  (float64(newArray[index] + newArray[index -1]) / 2)
+		return (float64(newArray[index] + newArray[index -1]) / 2)
 	}else{
-		median =  float64(newArray[index])
+		return float64(newArray[index])
 	}
-	return median
+	//return median
 }
 
 func main() {
