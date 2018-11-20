@@ -17,6 +17,14 @@ func (node *treeNode) setValue(value int){
 	node.value = value
 }
 
+func (root *treeNode) tranverse(){
+	if root == nil{
+		return
+	}
+	root.print()
+	root.left.tranverse()
+	root.right.tranverse()
+}
 
 func createNode(value int) *treeNode{
 	return &treeNode{value:value}
@@ -31,6 +39,13 @@ func main() {
 	root1.right = &treeNode{5,nil,nil}
 	fmt.Println(root1)
 	root1.right.left = createNode(0)
+
+	fmt.Println("遍历开始")
+	//遍历树结构
+	root1.tranverse()
+
+	fmt.Println("遍历完毕")
+
 	nodes := []treeNode{
 		{value:3},
 		{},
@@ -41,6 +56,5 @@ func main() {
 	root1.print()
 	root1.setValue(4)
 	root1.print()
-
 	//nil 调用方法
 }
