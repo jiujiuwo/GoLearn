@@ -26,8 +26,12 @@ func longestPalindromeDp(s string) string {
 			fmt.Println(j,i)
 			//动态规划递推式
 			//dp[i][j] = (j - i > 2) ? (dp[i+1][j-1] && judge) :judge
-			if i - j > 2{
+			//dp[i][j] 代表什么状态？
+			if i - j > 2{		//为什么是 i - j > 2 ?? =2 时，dp[i,j]是不是回文串只和[0:2]内的字符有关
+								//当i - j >2时，他是不是回文串才取决于dp[j+1,i-1] && judge
+								//i > j+2, i >1,
 				dp[j][i] = dp[j+1][i-1] && judge
+				//怎么保证[j+1][i-1]的值已经存在？j是小于等于i的，j
 			}else{
 				dp[j][i] = judge
 			}
