@@ -11,38 +11,37 @@ func threeSum(nums []int) [][]int {
 	if length<=0{
 		return nil
 	}
-	result := make([][]int,len(nums)*len(nums))
+	result := make([][]int,length*(length-1)*(length-2))
 	index :=0
 
 	sort.Ints(nums)
+	//fmt.Println(nums)
 
 	for i:=0;i<length;i++{
-		for j:=i+1;j<length;j++{
-			for k:=j+1;k<length;k++{
-				if nums[i] + nums[j] + nums[k] == 0{
+		//如果没有 nums[i] !=nums[i-1] ,则会有重复 [-4 -1 -1 0 1 2]
+		if i==0 || (i >0 && nums[i] !=nums[i-1]){
+			low := i+1
+			high := length -1
+			sum := 0 - nums[i]
+			for ;low<high;{
+				if nums[low]+nums[high] == sum{
 					result[index] = make([]int,3)
 					result[index][0] = nums[i]
-					result[index][1] = nums[j]
-					result[index][2] = nums[k]
-					if index>0{
-						//sort.Ints(result[index])
-						dup := false
-						//为什么是从0到 index+1呢
-						for m:=0;m<index;m++{
-							//sort.Ints(result[m])
-							//fmt.Println(m,index)
-							if result[m][0]==result[index][0]&&result[m][1]==result[index][1]&&result[m][2]==result[index][2]{
-								dup = true
-								break
-							}
-						}
-						if !dup{
-							//fmt.Println(i,j,k)
-							index++
-						}
-					}else{
-						index++
+					result[index][1] = nums[low]
+					result[index][2] = nums[high]
+					index++
+					for;low<high&&nums[low] == nums[low+1];{
+						low++
 					}
+					for;low<high&&nums[high] == nums[high-1];{
+						high--
+					}
+					low++
+					high--
+				}else if nums[low] + nums[high] < sum{
+					low++
+				}else{
+					high--
 				}
 			}
 		}
