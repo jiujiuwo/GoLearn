@@ -48,5 +48,5 @@ func main() {
 
 	fmt.Println(convertToBin(5),convertToBin(13),convertToBin(72387885))
 	printFile("abc.txt")
-	forever()
+	//forever()
 }
